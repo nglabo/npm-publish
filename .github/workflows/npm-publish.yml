@@ -21,8 +21,8 @@ jobs:
       - run: npm i -g npm@next-7
       - run: npm ci
       
-      - run: git config --global user.name "GitHub CI/CD"
-      - run: git config --global user.email "action@github.com"
+      - run: git config --global user.email "github-actions@github.com"
+      - run: git config --global user.name "github-actions[bot]"
 
       - run: npm version patch
       - run: npm publish --access public
