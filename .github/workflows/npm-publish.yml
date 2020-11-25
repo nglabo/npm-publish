@@ -18,16 +18,20 @@ jobs:
         with:
           node-version: '14'
           registry-url: https://registry.npmjs.org/
-      - run: npm i -g npm@next-7
-      - run: npm ci
-
-      - run: npm version patch
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-
+      # - run: npm i -g npm@next-7
+      # - run: npm ci
+      
       - run: git config --global user.name "GitHub CI/CD"
-      - run: git config --global user.email "action@github.com"   
+      - run: git config --global user.email "action@github.com"
+
+      - run: |
+          cd submodule
+          npm version patch
+
+      # - run: npm publish --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          
       - run: git push
         env:
           github-token: ${{ secrets.GITHUB_TOKEN }}
