@@ -7,9 +7,6 @@ on:
 
 jobs:
   build:
-    defaults:
-      run:
-        working-directory: submodule
     runs-on: ubuntu-latest
 
     steps:
