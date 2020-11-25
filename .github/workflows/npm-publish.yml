@@ -7,6 +7,9 @@ on:
 
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: submodule
     runs-on: ubuntu-latest
 
     steps:
@@ -24,9 +27,7 @@ jobs:
       - run: git config --global user.name "GitHub CI/CD"
       - run: git config --global user.email "action@github.com"
 
-      - run: |
-          cd submodule
-          npm version patch
+      - run: npm version patch
 
       # - run: npm publish --access public
       #   env:
