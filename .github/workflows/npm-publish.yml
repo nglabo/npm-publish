@@ -32,6 +32,8 @@ jobs:
       #   env:
       #     NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           
-      - run: git push
+      - run: |
+          cd $GITHUB_WORKSPACE
+          git push
         env:
           github-token: ${{ secrets.GITHUB_TOKEN }}
