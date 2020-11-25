@@ -24,7 +24,9 @@ jobs:
       - run: git config --global user.name "GitHub CI/CD"
       - run: git config --global user.email "action@github.com"
 
-      - run: npm version patch
+      - run: |
+          cd submodule
+          npm version patch
 
       # - run: npm publish --access public
       #   env:
