@@ -12,32 +12,23 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          persist-credentials: false
-          fetch-depth: 0
+          ref: ${{ github.event.release.target_commitish }}
 
       - uses: actions/setup-node@v2-beta
         with:
           node-version: '14'
           registry-url: https://registry.npmjs.org/
-      # - run: npm i -g npm@next-7
-      # - run: npm ci
+      - run: npm i -g npm@next-7
+      - run: npm ci
       
       - run: git config --global user.name "GitHub CI/CD"
       - run: git config --global user.email "action@github.com"
 
-      - run: |
-          cd submodule
-          npm version patch
-
-      # - run: npm publish --access public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-      - run: |
-          git config --global user.email "action@github.com" 
-          git config --global user.name "GitHub CI/CD"
-          git commit --message "Publish package" --all
-
-      - uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+      - run: npm version patch
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          
+      - run: git push
+        env:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
