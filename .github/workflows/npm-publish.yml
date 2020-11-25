@@ -12,7 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.release.target_commitish }}
+          persist-credentials: false
+          fetch-depth: 0
 
       - uses: actions/setup-node@v2-beta
         with:
@@ -31,8 +32,12 @@ jobs:
       # - run: npm publish --access public
       #   env:
       #     NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-          
-      - run: git add submodule/package.json
-      - run: git push
-        env:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          git config --global user.email "action@github.com" 
+          git config --global user.name "GitHub CI/CD"
+          git commit --message "Publish package" --all
+
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
