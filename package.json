@@ -1,6 +1,6 @@
 {
   "name": "@weslenng/npm-publish",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "index.js",
   "author": "Weslen Guerreiro <weslenng@outlook.com>",
   "license": "MIT"
