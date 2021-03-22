@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: '14'
           registry-url: https://registry.npmjs.org/
-      - run: npm i -g npm@next-7
+      - run: npm i -g npm@latest
       - run: npm ci
       
       - run: git config --global user.email "github-actions@github.com"
